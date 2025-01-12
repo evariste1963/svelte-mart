@@ -21,7 +21,10 @@
 			<div class="absolute right-0 top-8 z-10 mt-2 w-80 rounded-lg bg-white shadow-xl">
 				<div class="relative p-4">
 					<h2 class="mb-4 text-lg font-semibold">Your Cart</h2>
-					<button class="absolute right-4 top-4 rounded-full p-1 hover:bg-gray-100">
+					<button class="absolute right-4 top-4 rounded-full p-1 hover:bg-gray-100"
+          aria-label="close cart"
+          onclick={() => cartOpen = false}
+          >
 						<X class="size-4" />
 					</button>
 					<CartItem />
