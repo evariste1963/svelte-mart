@@ -40,7 +40,7 @@
 			>
 				<Plus class="size-4" />
 			</button>
-			<button class="ml-4 rounded p-1 text-red-500 hover:bg-red-100">
+			<button onclick={() => cartProduct.quantity = 0} class="ml-4 rounded p-1 text-red-500 hover:bg-red-100">
 				<Trash class="size-4" />
 			</button>
 		</div>
