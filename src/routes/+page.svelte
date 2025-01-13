@@ -15,6 +15,14 @@
     }
     return total;
   });
+
+const cartTotalCost = $derived.by(() => {
+    let totalCost = 0
+    for(const product of cartProducts){
+      totalCost += product.product.price * product.quantity;
+    }
+    return totalCost;
+  })
 </script>
 
 <div class="flex items-center bg-gray-300 p-4">
@@ -42,7 +50,7 @@
 						<CartItem bind:cartProduct={cartProducts[i]} />
 					{/each}
 					<div class="mt-4 border-gray-200 pt-4">
-						<p class="text-lg font-semibold">Total: $39.98</p>
+						<p class="text-lg font-semibold">Total: £{cartTotalCost.toFixed(2)}</p>
 					</div>
 				</div>
 			</div>
@@ -59,14 +67,15 @@
 					{product.title}
 				</p>
 				<div class="flex items-center justify-between">
-					<p class="text-xl font-bold">${product.price}</p>
+					<p class="text-xl font-bold">£{product.price}</p>
 					<button
 						class="rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700"
 						onclick={() => {
 							cartProducts.push({
 								id: crypto.randomUUID(),
 								quantity: 1,
-								product: product
+								product: product,
+                price: product.price,
 							});
 						}}
 					>
