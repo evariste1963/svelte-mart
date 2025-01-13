@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-    "open": "vite dev -- --open",
+		"open": "vite dev --open",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",

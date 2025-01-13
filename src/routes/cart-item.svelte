@@ -6,9 +6,10 @@
 
 	type Props = {
 		cartProduct: CartProduct;
+    removeItem: (id: string) => void;
 	};
 
-	let { cartProduct = $bindable() }: Props = $props();
+	let { cartProduct = $bindable(), removeItem }: Props = $props();
 </script>
 
 {#if cartProduct.quantity > 0}
@@ -40,7 +41,7 @@
 			>
 				<Plus class="size-4" />
 			</button>
-			<button onclick={() => cartProduct.quantity = 0} class="ml-4 rounded p-1 text-red-500 hover:bg-red-100">
+			<button onclick={() => removeItem(cartProduct.id)} class="ml-4 rounded p-1 text-red-500 hover:bg-red-100">
 				<Trash class="size-4" />
 			</button>
 		</div>
