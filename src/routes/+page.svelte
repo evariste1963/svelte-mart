@@ -9,20 +9,20 @@
 
 	let cartProducts = $state<CartProduct[]>([]);
 	const cartQuantity = $derived.by(() => {
-    let total = 0
-    for (const product of cartProducts) {
-      total += product.quantity
-    }
-    return total;
-  });
+		let total = 0;
+		for (const product of cartProducts) {
+			total += product.quantity;
+		}
+		return total;
+	});
 
-const cartTotalCost = $derived.by(() => {
-    let totalCost = 0
-    for(const product of cartProducts){
-      totalCost += product.product.price * product.quantity;
-    }
-    return totalCost;
-  })
+	const cartTotalCost = $derived.by(() => {
+		let totalCost = 0;
+		for (const product of cartProducts) {
+			totalCost += product.product.price * product.quantity;
+		}
+		return totalCost;
+	});
 </script>
 
 <div class="flex items-center bg-gray-300 p-4">
@@ -33,8 +33,8 @@ const cartTotalCost = $derived.by(() => {
 			class="flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700"
 		>
 			<ShoppingCart class="mr-2 size-5" />
-			<span>Cart {cartQuantity}
-		</button>
+			<span>Cart {cartQuantity} </span></button
+		>
 		{#if cartOpen}
 			<div class="absolute right-0 top-8 z-10 mt-2 w-80 rounded-lg bg-white shadow-xl">
 				<div class="relative p-4">
@@ -74,8 +74,7 @@ const cartTotalCost = $derived.by(() => {
 							cartProducts.push({
 								id: crypto.randomUUID(),
 								quantity: 1,
-								product: product,
-                price: product.price,
+								product: product
 							});
 						}}
 					>
