@@ -3,6 +3,7 @@
 	import CartItem from './cart-item.svelte';
 	import ShoppingCart from 'phosphor-svelte/lib/ShoppingCart';
 	import X from 'phosphor-svelte/lib/X';
+  import { slide } from 'svelte/transition';
 
 	let { data } = $props();
 	let cartOpen = $state(false);
@@ -36,7 +37,7 @@
 			<span>Cart {cartQuantity} </span></button
 		>
 		{#if cartOpen}
-			<div class="absolute right-0 top-8 z-10 mt-2 w-80 rounded-lg bg-white shadow-xl">
+			<div class="absolute right-0 top-8 z-10 mt-2 w-80 rounded-lg bg-white shadow-xl" transition:slide>
 				<div class="relative p-4">
 					<h2 class="mb-4 text-lg font-semibold">Your Cart</h2>
 					<button
