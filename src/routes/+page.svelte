@@ -7,8 +7,10 @@
 
 	let { data } = $props();
 	let cartOpen = $state(false);
-
-	let cartProducts = $state<CartProduct[]>([]);
+  // let inCart = $derived.by(()=> {
+  //   cartProducts.find(prod => prod.product.toString() === product.title)
+  
+let cartProducts = $state<CartProduct[]>([]);
 
 	const cartStats = $derived.by(() => {
 		let totalCost = 0;
@@ -80,18 +82,19 @@
 				</p>
 				<div class="flex items-center justify-between">
 					<p class="text-xl font-bold">£{product.price}</p>
-					<button
-						class="rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700"
-						onclick={() => {
-							cartProducts.push({
-								id: crypto.randomUUID(),
-								quantity: 1,
-								product: product
-							});
-						}}
-					>
-						Add to cart
-					</button>
+            <button 
+						  class="rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700"
+						  onclick={() => {
+              	  cartProducts.push({
+								  id: crypto.randomUUID(),
+								  quantity: 1,
+								  product: product
+							  });
+						  }
+            } 
+					  >
+						  Add to cart
+					  </button>
 				</div>
 			</div>
 		</div>
