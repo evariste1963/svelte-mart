@@ -33,6 +33,22 @@ let cartProducts = $state<CartProduct[]>([]);
     }
   })
 
+  function addToCart(product) {
+    for(let item of cartProducts) {
+      if(item.product.id === product.id) {
+        item.quantity += 1;
+        cartProducts = cartProducts;
+        // console.log(item.product.id, product.id, typeof(product.quantity))
+        return
+      }
+    }
+     cartProducts = [...cartProducts,{
+      id: product.id,
+      quantity:1,
+      product:product
+    }]        
+  }
+
   function removeFromCart(id: string) {
     cartProducts = cartProducts.filter(product => product.id != id)
   }
@@ -84,15 +100,8 @@ let cartProducts = $state<CartProduct[]>([]);
 					<p class="text-xl font-bold">£{product.price}</p>
             <button 
 						  class="rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700"
-						  onclick={() => {
-              	  cartProducts.push({
-								  id: crypto.randomUUID(),
-								  quantity: 1,
-								  product: product
-							  });
-						  }
-            } 
-					  >
+						  onclick={() => addToCart(product)}
+              	 					  >
 						  Add to cart
 					  </button>
 				</div>
