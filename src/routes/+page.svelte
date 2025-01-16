@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CartProduct } from '$lib/types';
+	import type { Product, CartProduct } from '$lib/types';
 	import CartItem from './cart-item.svelte';
 	import ShoppingCart from 'phosphor-svelte/lib/ShoppingCart';
 	import X from 'phosphor-svelte/lib/X';
@@ -7,11 +7,8 @@
 
 	let { data } = $props();
 	let cartOpen = $state(false);
-  // let inCart = $derived.by(()=> {
-  //   cartProducts.find(prod => prod.product.toString() === product.title)
   
-let cartProducts = $state<CartProduct[]>([]);
-
+  let cartProducts = $state<CartProduct[]>([]);
 	const cartStats = $derived.by(() => {
 		let totalCost = 0;
     let totalQty = 0;
@@ -33,7 +30,7 @@ let cartProducts = $state<CartProduct[]>([]);
     }
   })
 
-  function addToCart(product) {
+  function addToCart(product: Product) {
     for(let item of cartProducts) {
       if(item.product.id === product.id) {
         item.quantity += 1;
@@ -49,7 +46,7 @@ let cartProducts = $state<CartProduct[]>([]);
     }]        
   }
 
-  function removeFromCart(id: string) {
+  function removeFromCart(id: number) {
     cartProducts = cartProducts.filter(product => product.id != id)
   }
 
@@ -76,7 +73,7 @@ let cartProducts = $state<CartProduct[]>([]);
 					>
 						<X class="size-4" />
 					</button>
-					{#each cartProducts as _, i}
+					{#each cartProducts as _,i}
 						<CartItem bind:cartProduct={cartProducts[i]} removeItem={removeFromCart} />
 					{/each}
 					<div class="mt-4 border-gray-200 pt-4">
@@ -101,9 +98,7 @@ let cartProducts = $state<CartProduct[]>([]);
             <button 
 						  class="rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700"
 						  onclick={() => addToCart(product)}
-              	 					  >
-						  Add to cart
-					  </button>
+             >Add to cart</button>
 				</div>
 			</div>
 		</div>

@@ -6,7 +6,7 @@
 
 	type Props = {
 		cartProduct: CartProduct;
-    removeItem: (id: string) => void;
+    removeItem: (id: number) => void;
 	};
 
 	let { cartProduct = $bindable(), removeItem }: Props = $props();
