@@ -73,6 +73,7 @@
 					>
 						<X class="size-4" />
 					</button>
+          <!-- eslint-disable-next-line -->
 					{#each cartProducts as _,i}
 						<CartItem bind:cartProduct={cartProducts[i]} removeItem={removeFromCart} />
 					{/each}
