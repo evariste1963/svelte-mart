@@ -3,12 +3,14 @@
 	import CartItem from './cart-item.svelte';
 	import ShoppingCart from 'phosphor-svelte/lib/ShoppingCart';
 	import X from 'phosphor-svelte/lib/X';
-  import { slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 
 	let { data } = $props();
 	let cartOpen = $state(false);
-  
+	let things = $state(data)
+	
   let cartProducts = $state<CartProduct[]>([]);
+
 	const cartStats = $derived.by(() => {
 		let totalCost = 0;
     let totalQty = 0;
@@ -30,10 +32,10 @@
     }
   })
 
+	things.products.forEach (prod => prod.isDisabled = false)
+
   function addToCart(product: Product) {
-    console.log(product.isDisabled, product.title)
     product.isDisabled = true
-    console.log(product.isDisabled)
     for(let item of cartProducts) {
       if(item.product.id === product.id) {
         item.quantity += 1;
@@ -49,10 +51,8 @@
     }
 
   function removeFromCart(id: number) {
-  let  removedProduct = data.products.filter(product => product.id === id)
-    console.log(removedProduct[0].isDisabled)
+  let  removedProduct = things.products.filter(product => product.id === id)
     removedProduct[0].isDisabled = false  
-    console.log(removedProduct[0].isDisabled)
     cartProducts = cartProducts.filter(product => product.id != id)
   }
 
@@ -94,7 +94,7 @@
 </div>
 
 <div class="grid grid-cols-1 gap-6 bg-gray-100 p-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-	{#each data.products as product}
+	{#each things.products as product}
 		<div class="overflow-hidden rounded-xl bg-white shadow-lg">
 			<img src={product.thumbnail} alt={product.title} class="h-48 w-full object-cover" />
 			<div class="p-4">
@@ -107,9 +107,18 @@
 						  class="rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700"
 						  onclick={() => addToCart(product)}
             disabled = {product.isDisabled}            
-             >Add to cart</button>
+             >{product.isDisabled? 'Added to Cart' : 'Add to Cart'}
 				</div>
 			</div>
 		</div>
 	{/each}
 </div>
+
+
+<style>
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+</style>
