@@ -22,6 +22,7 @@ export type Product = {
 	thumbnail: string;
 	images: string[];
   quantity:number;
+  isDisabled: boolean;
 };
 
 export type CartProduct = {

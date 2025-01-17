@@ -26,13 +26,15 @@
 			</div>
 		</div>
 		<div class="flex items-center">
-			<button
-				onclick={() => cartProduct.quantity--}
-				class="rounded p-1 hover:bg-gray-200"
-				aria-label="Subtract 1 from quantity"
-			>
-				<Minus class="size-4" />
-			</button>
+      {#if cartProduct.quantity > 1}
+        <button
+				  onclick={() => cartProduct.quantity--}
+				  class="rounded p-1 hover:bg-gray-200"
+				  aria-label="Subtract 1 from quantity"
+			  >
+				  <Minus class="size-4" />
+			  </button> 
+      {/if}
 			<span class="mx-2">{cartProduct.quantity}</span>
 			<button
 				onclick={() => cartProduct.quantity++}

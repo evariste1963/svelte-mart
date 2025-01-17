@@ -31,24 +31,31 @@
   })
 
   function addToCart(product: Product) {
+    console.log(product.isDisabled, product.title)
+    product.isDisabled = true
+    console.log(product.isDisabled)
     for(let item of cartProducts) {
       if(item.product.id === product.id) {
         item.quantity += 1;
         cartProducts = cartProducts;
-        // console.log(item.product.id, product.id, typeof(product.quantity))
         return
       }
     }
      cartProducts = [...cartProducts,{
       id: product.id,
       quantity:1,
-      product:product
-    }]        
-  }
+      product:product,
+      }] 
+    }
 
   function removeFromCart(id: number) {
+  let  removedProduct = data.products.filter(product => product.id === id)
+    console.log(removedProduct[0].isDisabled)
+    removedProduct[0].isDisabled = false  
+    console.log(removedProduct[0].isDisabled)
     cartProducts = cartProducts.filter(product => product.id != id)
   }
+
 
 </script>
 
@@ -99,6 +106,7 @@
             <button 
 						  class="rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700"
 						  onclick={() => addToCart(product)}
+            disabled = {product.isDisabled}            
              >Add to cart</button>
 				</div>
 			</div>
