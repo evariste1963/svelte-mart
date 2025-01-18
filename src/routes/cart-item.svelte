@@ -6,7 +6,7 @@
 
 	type Props = {
 		cartProduct: CartProduct;
-    removeItem: (id: number) => void;
+		removeItem: (id: number) => void;
 	};
 
 	let { cartProduct = $bindable(), removeItem }: Props = $props();
@@ -26,15 +26,14 @@
 			</div>
 		</div>
 		<div class="flex items-center">
-      {#if cartProduct.quantity > 1}
-        <button
-				  onclick={() => cartProduct.quantity--}
-				  class="rounded p-1 hover:bg-gray-200"
-				  aria-label="Subtract 1 from quantity"
-			  >
-				  <Minus class="size-4" />
-			  </button> 
-      {/if}
+			<button
+				onclick={() =>
+					cartProduct.quantity > 1 ? cartProduct.quantity-- : removeItem(cartProduct.id)}
+				class="rounded p-1 hover:bg-gray-200"
+				aria-label="Subtract 1 from quantity"
+			>
+				<Minus class="size-4" />
+			</button>
 			<span class="mx-2">{cartProduct.quantity}</span>
 			<button
 				onclick={() => cartProduct.quantity++}
@@ -43,7 +42,10 @@
 			>
 				<Plus class="size-4" />
 			</button>
-			<button onclick={() => removeItem(cartProduct.id)} class="ml-4 rounded p-1 text-red-500 hover:bg-red-100">
+			<button
+				onclick={() => removeItem(cartProduct.id)}
+				class="ml-4 rounded p-1 text-red-500 hover:bg-red-100"
+			>
 				<Trash class="size-4" />
 			</button>
 		</div>

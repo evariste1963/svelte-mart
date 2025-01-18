@@ -21,8 +21,8 @@ export type Product = {
 	meta: Meta;
 	thumbnail: string;
 	images: string[];
-  quantity:number;
-  isDisabled: boolean;
+	quantity: number;
+	cartBtnIsDisabled: boolean;
 };
 
 export type CartProduct = {
