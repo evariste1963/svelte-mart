@@ -25,6 +25,7 @@
 
 	// add isDisabled key to each Product product and set to false
 	shopWindow.products.forEach((prod) => (prod.cartBtnIsDisabled = false));
+  
 	const qualifiesForFreeShipping = $derived(cartStats.totalCost >= 50);
 
 	$effect(() => {
@@ -56,22 +57,27 @@
 		let removedProduct = shopWindow.products.filter((product) => product.id === id);
 		removedProduct[0].cartBtnIsDisabled = false;
 		cartProducts = cartProducts.filter((product) => product.id != id);
+    if(cartStats.totalQty == 0) {
+      cartOpen = false
+    }
 	}
 </script>
 
 <div class="flex items-center bg-gray-300 p-4">
-	<span class="text-lg font-bold">SvelteMart</span>
+	<span class="text-6xl font-bold">SvelteMart</span>
 	<div class="relative ml-auto flex items-center">
 		<button
-			onclick={() => (cartOpen = !cartOpen)}
-			class="flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700"
-		>
-			<ShoppingCart class="mr-2 size-5" />
-			<span>Cart {cartStats.totalQty} </span></button
+			onclick={() => (cartOpen = true)}
+      disabled = {cartStats.totalQty == 0? true : false}
+      class={cartStats.totalQty == 0 && cartOpen==false? "flex items-center rounded-full bg-gray-500 px-4 py-2 text-white hover:bg-gray-600" :
+        "flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700"}
+    >
+			<ShoppingCart class="mr-6 size-10" />
+			<span class="mr-2 justify-items: end">Items {cartStats.totalQty}<br>£ {cartStats.totalCost.toFixed(2)} </span></button
 		>
 		{#if cartOpen}
 			<div
-				class="absolute right-0 top-8 z-10 mt-2 w-80 rounded-lg bg-white shadow-xl"
+				class="absolute right-0 top-16 z-10 mt-2 w-80 rounded-lg bg-white shadow-xl"
 				transition:slide
 			>
 				<div class="relative p-4">
@@ -120,7 +126,9 @@
 
 <style>
 	button:disabled {
-		background-color: #ccc;
+		background-color: #777;
 		cursor: not-allowed;
 	}
+
+
 </style>
