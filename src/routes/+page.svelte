@@ -25,7 +25,7 @@
 
 	// add isDisabled key to each Product product and set to false
 	shopWindow.products.forEach((prod) => (prod.cartBtnIsDisabled = false));
-  
+
 	const qualifiesForFreeShipping = $derived(cartStats.totalCost >= 50);
 
 	$effect(() => {
@@ -57,9 +57,9 @@
 		let removedProduct = shopWindow.products.filter((product) => product.id === id);
 		removedProduct[0].cartBtnIsDisabled = false;
 		cartProducts = cartProducts.filter((product) => product.id != id);
-    if(cartStats.totalQty == 0) {
-      cartOpen = false
-    }
+		if (cartStats.totalQty == 0) {
+			cartOpen = false;
+		}
 	}
 </script>
 
@@ -67,13 +67,16 @@
 	<span class="text-6xl font-bold">SvelteMart</span>
 	<div class="relative ml-auto flex items-center">
 		<button
-			onclick={() => (cartOpen = true)}
-      disabled = {cartStats.totalQty == 0? true : false}
-      class={cartStats.totalQty == 0 && cartOpen==false? "flex items-center rounded-full bg-gray-500 px-4 py-2 text-white hover:bg-gray-600" :
-        "flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700"}
-    >
+			onclick={() => (cartOpen = cartStats.totalQty < 1 ? false : !cartOpen)}
+			disabled={cartStats.totalQty == 0 ? true : false}
+			class={cartStats.totalQty == 0 && cartOpen == false
+				? 'tooltip flex items-center rounded-full bg-gray-500 px-4 py-2 text-white hover:bg-gray-600'
+				: 'flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700'}
+		>
 			<ShoppingCart class="mr-6 size-10" />
-			<span class="mr-2 justify-items: end">Items {cartStats.totalQty}<br>£ {cartStats.totalCost.toFixed(2)} </span></button
+			<span class="justify-items: end mr-2"
+				>Items {cartStats.totalQty}<br />£ {cartStats.totalCost.toFixed(2)}
+			</span></button
 		>
 		{#if cartOpen}
 			<div
@@ -130,5 +133,25 @@
 		cursor: not-allowed;
 	}
 
+	.tooltip {
+		position: relative;
+	}
 
+	.tooltip::after {
+		content: 'Your cart is empty!';
+		display: none;
+		position: absolute;
+		top: 102%;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: #777;
+		color: #fff;
+		padding: 1rem;
+		border-radius: 1rem;
+		white-space: nowrap;
+	}
+
+	.tooltip:hover::after {
+		display: block;
+	}
 </style>
