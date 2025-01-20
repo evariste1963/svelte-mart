@@ -69,8 +69,7 @@
 		<button
 			onclick={() => (cartOpen = cartStats.totalQty < 1 ? false : !cartOpen)}
 			disabled={cartStats.totalQty == 0 ? true : false}
-      data-content=""
-			class={cartStats.totalQty == 0 && cartOpen == false
+			class={cartStats.totalQty == 0 && !cartOpen
 				? 'cart-empty btn flex items-center rounded-full bg-gray-500 px-4 py-2 w-48 h-14 text-white hover:bg-gray-600'
 				: 'flex items-center rounded-full bg-sky-600 px-4 py-2i w-48 h-14 text-white hover:bg-sky-700'}
 		>
@@ -121,7 +120,7 @@
 					<p class="text-xl font-bold">£{product.price}</p>
 					<button
 						class={product.cartBtnIsDisabled == false ? "rounded-full bg-sky-600 px-4 py-2 w-36 h-12 text-white transition-colors duration-300 hover:bg-sky-700" :
-            "btn in-cart rounded-full bg-gray-500 px-4 py-2 w-36 h-12 text-align text-white transition-colors duration-300 hover:bg-gray-600"}
+            "btn in-cart rounded-full bg-gray-400 px-4 py-2 w-36 h-12 text-align transition-colors"}
 						onclick={() => addToCart(product)}
 						disabled={product.cartBtnIsDisabled}
 						>{product.cartBtnIsDisabled ? '' : 'Add to Cart'}
@@ -152,21 +151,28 @@
     content: "Items: 0";
     position: absolute;
     width: 100%;
-    color: #fff;
     font-weight: bold;
     line-height: 3.5;
     transition: all 400ms;
     top: 0;
+    left:12px;
+  }
+
+  .btn.cart-empty::before{
+    left: 0;
   }
 
   .btn.cart-empty:hover::after{
-    top: -40px;
+    top: -60px;
+    left:12px;
   }
 
   .btn.cart-empty::before {
     content: "Cart Empty";
-    top: 40px;
-}
+    top: 60px;
+    color: #fff;
+    background-color: red;
+  }
 
   .btn.cart-empty:hover::before {
     top: 0;
@@ -177,20 +183,24 @@
     content: "In Cart";
     position: absolute;
     margin: auto;
-    color: #fff;
+    color: #ddd;
+    width:100%;
     font-weight: bold;
     line-height: 3;
     transition: all 400ms;
+    transition-delay: 500ms;
     text-wrap:wrap; top: 0;
   }
 
   .btn.in-cart:hover::after{
-    top: -40px;
+    top: -48px;
   }
 
   .btn.in-cart::before {
-    content: "Already in Cart";
-    top: 40px;
+    content: "In Cart";
+    top: 48px;
+    color: #fff;
+    background-color: red;
 }
 
   .btn.in-cart:hover::before {
