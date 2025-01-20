@@ -71,8 +71,8 @@
 			disabled={cartStats.totalQty == 0 ? true : false}
       data-content=""
 			class={cartStats.totalQty == 0 && cartOpen == false
-				? 'cart-empty flex items-center rounded-full bg-gray-500 px-4 py-2 text-white hover:bg-gray-600'
-				: 'flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700'}
+				? 'cart-empty btn flex items-center rounded-full bg-gray-500 px-4 py-2 w-48 h-14 text-white hover:bg-gray-600'
+				: 'flex items-center rounded-full bg-sky-600 px-4 py-2i w-48 h-14 text-white hover:bg-sky-700'}
 		>
 			<ShoppingCart class="mr-6 size-10" />
 			<span class="justify-items: end mr-2"
@@ -137,14 +137,39 @@
 		/* background-color: #777; */
     /* cursor: default ; */
 	/* } */
-.cart-empty::before {
-    display: none;
-    content: "Add Something to Cart";
+
+  .btn {
+    display:flex ;
+    overflow: hidden;
+    position:relative;
+  }
+.btn.cart-empty::after,
+  .btn.cart-empty::before {
+    content: "Items: 0";
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-weight: bold;
+    line-height: 3.5;
+    transition: all 400ms;
+    top: 0;
   }
 
-  .cart-empty::after {
-    content: "Cart Empty"
+  .btn.cart-empty:hover::after{
+    top: -40px;
   }
+
+  .btn.cart-empty::before {
+    content: "Cart Empty";
+    top: 40px;
+}
+
+  .btn.cart-empty:hover::before {
+    top: 0;
+}
+
+
 
 
 	/* .tooltip { */
