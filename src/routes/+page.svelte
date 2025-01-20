@@ -69,8 +69,9 @@
 		<button
 			onclick={() => (cartOpen = cartStats.totalQty < 1 ? false : !cartOpen)}
 			disabled={cartStats.totalQty == 0 ? true : false}
+      data-content=""
 			class={cartStats.totalQty == 0 && cartOpen == false
-				? 'flex items-center rounded-full bg-gray-500 px-4 py-2 text-white hover:bg-gray-600'
+				? 'cart-empty flex items-center rounded-full bg-gray-500 px-4 py-2 text-white hover:bg-gray-600'
 				: 'flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700'}
 		>
 			<ShoppingCart class="mr-6 size-10" />
@@ -78,9 +79,7 @@
 				>
         {#if cartStats.totalQty > 0}
           Items {cartStats.totalQty}<br />£ {cartStats.totalCost.toFixed(2)}
-          {:else}
-          Cart<br /> Empty
-{/if}
+        {/if}
 			</span></button
 		>
 		{#if cartOpen}
@@ -138,6 +137,15 @@
 		/* background-color: #777; */
     /* cursor: default ; */
 	/* } */
+.cart-empty::before {
+    display: none;
+    content: "Add Something to Cart";
+  }
+
+  .cart-empty::after {
+    content: "Cart Empty"
+  }
+
 
 	/* .tooltip { */
 	/* 	position: relative; */
