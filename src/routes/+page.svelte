@@ -70,12 +70,17 @@
 			onclick={() => (cartOpen = cartStats.totalQty < 1 ? false : !cartOpen)}
 			disabled={cartStats.totalQty == 0 ? true : false}
 			class={cartStats.totalQty == 0 && cartOpen == false
-				? 'tooltip flex items-center rounded-full bg-gray-500 px-4 py-2 text-white hover:bg-gray-600'
+				? 'flex items-center rounded-full bg-gray-500 px-4 py-2 text-white hover:bg-gray-600'
 				: 'flex items-center rounded-full bg-sky-600 px-4 py-2 text-white hover:bg-sky-700'}
 		>
 			<ShoppingCart class="mr-6 size-10" />
 			<span class="justify-items: end mr-2"
-				>Items {cartStats.totalQty}<br />£ {cartStats.totalCost.toFixed(2)}
+				>
+        {#if cartStats.totalQty > 0}
+          Items {cartStats.totalQty}<br />£ {cartStats.totalCost.toFixed(2)}
+          {:else}
+          Cart<br /> Empty
+{/if}
 			</span></button
 		>
 		{#if cartOpen}
@@ -116,7 +121,8 @@
 				<div class="flex items-center justify-between">
 					<p class="text-xl font-bold">£{product.price}</p>
 					<button
-						class="rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700"
+						class={product.cartBtnIsDisabled == false ? "rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700" :
+            "rounded-full bg-gray-500 px-4 py-2 text-white transition-colors duration-300 hover:bg-gray-600"}
 						onclick={() => addToCart(product)}
 						disabled={product.cartBtnIsDisabled}
 						>{product.cartBtnIsDisabled ? 'Added to Cart' : 'Add to Cart'}
@@ -128,30 +134,30 @@
 </div>
 
 <style>
-	button:disabled {
-		background-color: #777;
-		cursor: not-allowed;
-	}
+	/* button:disabled { */
+		/* background-color: #777; */
+    /* cursor: default ; */
+	/* } */
 
-	.tooltip {
-		position: relative;
-	}
-
-	.tooltip::after {
-		content: 'Your cart is empty!';
-		display: none;
-		position: absolute;
-		top: 102%;
-		left: 50%;
-		transform: translateX(-50%);
-		background-color: #777;
-		color: #fff;
-		padding: 1rem;
-		border-radius: 1rem;
-		white-space: nowrap;
-	}
-
-	.tooltip:hover::after {
-		display: block;
-	}
+	/* .tooltip { */
+	/* 	position: relative; */
+	/* } */
+	/**/
+	/* .tooltip::after { */
+	/* 	content: 'Your cart is empty!'; */
+	/* 	display: none; */
+	/* 	position: absolute; */
+	/* 	top: 102%; */
+	/* 	left: 50%; */
+	/* 	transform: translateX(-50%); */
+	/* 	background-color: #777; */
+	/* 	color: #fff; */
+	/* 	padding: 1rem; */
+	/* 	border-radius: 1rem; */
+	/* 	white-space: nowrap; */
+	/* } */
+	/**/
+	/* .tooltip:hover::after { */
+	/* 	display: block; */
+	/* } */
 </style>
