@@ -120,11 +120,11 @@
 				<div class="flex items-center justify-between">
 					<p class="text-xl font-bold">£{product.price}</p>
 					<button
-						class={product.cartBtnIsDisabled == false ? "rounded-full bg-sky-600 px-4 py-2 text-white transition-colors duration-300 hover:bg-sky-700" :
-            "rounded-full bg-gray-500 px-4 py-2 text-white transition-colors duration-300 hover:bg-gray-600"}
+						class={product.cartBtnIsDisabled == false ? "rounded-full bg-sky-600 px-4 py-2 w-36 h-12 text-white transition-colors duration-300 hover:bg-sky-700" :
+            "btn in-cart rounded-full bg-gray-500 px-4 py-2 w-36 h-12 text-align text-white transition-colors duration-300 hover:bg-gray-600"}
 						onclick={() => addToCart(product)}
 						disabled={product.cartBtnIsDisabled}
-						>{product.cartBtnIsDisabled ? 'Added to Cart' : 'Add to Cart'}
+						>{product.cartBtnIsDisabled ? '' : 'Add to Cart'}
 					</button>
 				</div>
 			</div>
@@ -133,21 +133,24 @@
 </div>
 
 <style>
-	/* button:disabled { */
-		/* background-color: #777; */
-    /* cursor: default ; */
-	/* } */
 
   .btn {
     display:flex ;
     overflow: hidden;
+    text-wrap: wrap ;
+    text-align:center;
     position:relative;
+  }
+
+  .btn.in-cart {
+    justify-content: center;
+    justify-items: center;
+
   }
 .btn.cart-empty::after,
   .btn.cart-empty::before {
     content: "Items: 0";
     position: absolute;
-    text-align: center;
     width: 100%;
     color: #fff;
     font-weight: bold;
@@ -169,28 +172,29 @@
     top: 0;
 }
 
+.btn.in-cart::after,
+  .btn.in-cart::before {
+    content: "In Cart";
+    position: absolute;
+    margin: auto;
+    color: #fff;
+    font-weight: bold;
+    line-height: 3;
+    transition: all 400ms;
+    text-wrap:wrap; top: 0;
+  }
 
+  .btn.in-cart:hover::after{
+    top: -40px;
+  }
 
+  .btn.in-cart::before {
+    content: "Already in Cart";
+    top: 40px;
+}
 
-	/* .tooltip { */
-	/* 	position: relative; */
-	/* } */
-	/**/
-	/* .tooltip::after { */
-	/* 	content: 'Your cart is empty!'; */
-	/* 	display: none; */
-	/* 	position: absolute; */
-	/* 	top: 102%; */
-	/* 	left: 50%; */
-	/* 	transform: translateX(-50%); */
-	/* 	background-color: #777; */
-	/* 	color: #fff; */
-	/* 	padding: 1rem; */
-	/* 	border-radius: 1rem; */
-	/* 	white-space: nowrap; */
-	/* } */
-	/**/
-	/* .tooltip:hover::after { */
-	/* 	display: block; */
-	/* } */
+  .btn.in-cart:hover::before {
+    top: 0;
+}
+
 </style>
