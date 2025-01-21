@@ -64,7 +64,7 @@
 </script>
 
 <div class="flex items-center bg-gray-300 p-4">
-	<span class="text-6xl font-bold">SvelteMart</span>
+	<span class="title font-effect-shadow-multiple text-6xl font-bold">SvelteMart</span>
 	<div class="relative ml-auto flex items-center">
 		<button
 			onclick={() => (cartOpen = cartStats.totalQty < 1 ? false : !cartOpen)}
@@ -132,7 +132,11 @@
 </div>
 
 <style>
-
+ 
+.title {
+  font-family: "Caveat";
+  font-weight: 800 ;
+}
   .btn {
     display:flex ;
     overflow: hidden;
@@ -169,9 +173,10 @@
 
   .btn.cart-empty::before {
     content: "Cart Empty";
+    padding-left: 2rem;
     top: 60px;
     color: #fff;
-    background-color: red;
+    background-color: rgba(255,0,0,0.333)
   }
 
   .btn.cart-empty:hover::before {
@@ -200,7 +205,7 @@
     content: "In Cart";
     top: 48px;
     color: #fff;
-    background-color: red;
+   background-color: rgba(255,0,0,0.3);
 }
 
   .btn.in-cart:hover::before {
