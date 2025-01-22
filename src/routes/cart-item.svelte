@@ -18,11 +18,11 @@
 			<img
 				src={cartProduct.product.thumbnail}
 				alt="Product"
-				class="mr-4 size-12 rounded object-cover"
+				class="mr-4 size-16 rounded object-cover"
 			/>
-			<div>
-				<p class="font-medium">{cartProduct.product.title}</p>
-				<p class="text-sm">£{cartProduct.product.price} each</p>
+			<div >
+				<p class="text-2xl">{cartProduct.product.title}</p>
+				<p class="text-2xl">£{cartProduct.product.price} each</p>
 			</div>
 		</div>
 		<div class="flex items-center">
@@ -32,21 +32,21 @@
 				class="rounded p-1 hover:bg-gray-200"
 				aria-label="Subtract 1 from quantity"
 			>
-				<Minus class="size-4" />
+				<Minus class="size-5" />
 			</button>
-			<span class="mx-2">{cartProduct.quantity}</span>
+			<span class="mx-2 text-2xl">{cartProduct.quantity}</span>
 			<button
 				onclick={() => cartProduct.quantity++}
 				class="rounded p-1 hover:bg-gray-200"
 				aria-label="Add 1 to quantity"
 			>
-				<Plus class="size-4" />
+				<Plus class="size-5" />
 			</button>
 			<button
 				onclick={() => removeItem(cartProduct.id)}
 				class="ml-4 rounded p-1 text-red-500 hover:bg-red-100"
 			>
-				<Trash class="size-4" />
+				<Trash class="size-8" />
 			</button>
 		</div>
 	</div>
