@@ -205,7 +205,7 @@
     content: "In Cart";
     top: 48px;
     color: #fff;
-   background-color: rgba(255,0,0,0.3);
+   background-color: rgba(7,7,7,0.3);
 }
 
   .btn.in-cart:hover::before {
